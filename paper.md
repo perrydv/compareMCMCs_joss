@@ -1,5 +1,5 @@
 ---
-title: 'Gala: A Python package for galactic dynamics'
+title: 'compareMCMCs: An R package for studying MCMC efficiency'
 tags:
   - Python
   - astronomy
