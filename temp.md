@@ -8,11 +8,11 @@ tags:
   - JAGS
 authors:
   - name: Perry de Valpine
-  affiliation: 1
+    affiliation: 1
   - name: Sally Paganin
-  affiliation: 1
+    affiliation: 1
   - name: Daniel Turek
-  affiliation: 2
+    affiliation: 2
 affiliations:
   - name: University of California, Berkeley
    index: 1
