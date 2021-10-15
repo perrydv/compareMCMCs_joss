@@ -16,7 +16,7 @@ authors:
 affiliations:
  - name:  University of California, Berkeley
    index: 1
- - name: Institution Name
+ - name:  Williams College
    index: 2
  - name: Independent Researcher
    index: 3
