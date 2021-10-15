@@ -32,7 +32,7 @@ The R package `compareMCMCs` provides a highly modular system for managing perfo
 
 # Statement of need
 
-TBD
+Try one citation:  `nimble` [@devalpine2017].
 
 # Acknowledgements
 
