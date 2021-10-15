@@ -14,12 +14,10 @@ authors:
   - name: Daniel Turek
     affiliation: 2
 affiliations:
- - name: Lyman Spitzer, Jr. Fellow, Princeton University
+  - name: University of California, Berkeley
    index: 1
- - name: Institution Name
+  - name: Williams College
    index: 2
- - name: Independent Researcher
-   index: 3
 date: 13 August 2017
 bibliography: paper.bib
 
