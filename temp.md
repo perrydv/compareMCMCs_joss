@@ -15,11 +15,12 @@ authors:
   affiliation: 2
 affiliations:
   - name: University of California, Berkeley
-  - index: 1
+   index: 1
   - name: Williams College
-  - index: 2
+   index: 2
 date: 15 Oct 2021
 bibliography: paper.bib
+
 ---
 
 # Summary
