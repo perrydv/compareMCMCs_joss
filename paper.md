@@ -14,10 +14,12 @@ authors:
   - name: Daniel Turek
     affiliation: 2
 affiliations:
-  - name: University of California, Berkeley
+ - name:  University of California, Berkeley
    index: 1
-  - name: Williams College
+ - name: Institution Name
    index: 2
+ - name: Independent Researcher
+   index: 3
 date: 13 August 2017
 bibliography: paper.bib
 
