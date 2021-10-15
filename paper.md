@@ -1,112 +1,41 @@
 ---
-title: 'Gala: A Python package for galactic dynamics'
+title: 'compareMCMCs: An R package for studying MCMC efficiency'
 tags:
-  - Python
-  - astronomy
-  - dynamics
-  - galactic dynamics
-  - milky way
+  - R
+  - statistics
+  - Markov chain Monte Carlo
+  - nimble
+  - JAGS
 authors:
-  - name: Adrian M. Price-Whelan^[co-first author] # note this makes a footnote saying 'co-first author'
-    orcid: 0000-0003-0872-7098
-    affiliation: "1, 2" # (Multiple affiliations must be quoted)
-  - name: Author Without ORCID^[co-first author] # note this makes a footnote saying 'co-first author'
-    affiliation: 2
-  - name: Author with no affiliation^[corresponding author]
-    affiliation: 3
+  - name: Perry de Valpine
+  affiliation: 1
+  - name: Sally Paganin
+  affiliation: 1
+  - name: Daniel Turek
+  affiliation: 2
 affiliations:
- - name: Lyman Spitzer, Jr. Fellow, Princeton University
-   index: 1
- - name: Institution Name
-   index: 2
- - name: Independent Researcher
-   index: 3
-date: 13 August 2017
+  - name: University of California, Berkeley
+  - index: 1
+  - name: Williams College
+  - index: 2
+date: 15 Oct 2021
 bibliography: paper.bib
-
-# Optional fields if submitting to a AAS journal too, see this blog post:
-# https://blog.joss.theoj.org/2018/12/a-new-collaboration-with-aas-publishing
-aas-doi: 10.3847/xxxxx <- update this with the DOI from AAS once you know it.
-aas-journal: Astrophysical Journal <- The name of the AAS journal.
 ---
 
 # Summary
 
-The forces on stars, galaxies, and dark matter under external gravitational
-fields lead to the dynamical evolution of structures in the universe. The orbits
-of these bodies are therefore key to understanding the formation, history, and
-future state of galaxies. The field of "galactic dynamics," which aims to model
-the gravitating components of galaxies to study their structure and evolution,
-is now well-established, commonly taught, and frequently used in astronomy.
-Aside from toy problems and demonstrations, the majority of problems require
-efficient numerical tools, many of which require the same base code (e.g., for
-performing numerical orbit integration).
+Markov chain Monte Carlo (MCMC) algorithms are used to stochastically simulate from complicated probability distributions.  MCMC is very widely used to implement Bayesian statistical analysis, where the distribution of interest (the "target distribution") is a posterior distribution of parameters given data.  In this context, the posterior is known only up to a constant, so only relative probabilities (or densities) can be easily calculated, which is sufficient for MCMC to work.   In applied Bayesian statistics, MCMC algorithms for large or complex statistical models and data sets are sometimes run for minutes, hours or days, making them an analysis bottleneck, so there is a premium on efficiency.  MCMC efficiency includes both computational speed and algorithmic mixing, which refers to how well the algorithm explores the posterior distribution from one iteration to the next.  Computational speed may comprise one or more steps such as algorithm setup, MCMC "burn-in" or "warm-up" phases, and MCMC execution or "sampling". 
+
+There are many MCMC algorithms (also called "samplers") and software packages implementing them.   Because MCMC samplers can be mixed and matched, with different samplers for the same or different dimensions of a target distribution possibly combined into the same MCMC algorithm, there is an enormous space of MCMC algorithms.  Invention of new methods, comparisons among methods, and theoretical study of MCMC mixing are all important areas of active research.  Various software packages provide samplers such as Gibbs, adaptive random-walk Metropolis-Hastings, slice, Hamiltonian, multivariate ("block") or other variants of these, and others.  Different MCMC algorithms can yield efficiency that differs by orders of magnitude for a particular problem, with these variations in efficiency being problem-dependent. 
+
+The R package `compareMCMCs` provides a highly modular system for managing performance comparisons among MCMC software packages for purposes of research on MCMC methods.   MCMC runs can take a long time, so the output ("samples") and components of computation time from a run are stored regardless of whether performance metrics are computed immediately.   Arbitrary MCMC packages ("MCMC engines") can be added to the system by writing a simple plug-in or wrapper to manage inputs and outputs in a unified way.   Conversions among model parameter names and/or different parameterizations can be provided to standardize across packages.   Performance metrics are organized by model parameter (one result per parameter per MCMC engine), by MCMC (one result per MCMC engine), or arbitrarily (a user-defined list of metric results per MCMC engine).   Built-in metrics include two methods of estimating effective sample size (ESS), posterior summaries such as mean and common quantiles, efficiency defined as ESS per computation time, rate defined as computation time per ESS, and minimum efficiency per MCMC.   New metrics can be provided by a plug-in system and applied programmatically to a set of MCMC samples without re-running the MCMC engines.   Finally, standardized graphical comparison pages can be generated in html.  Built-in graphical outputs include figures comparing MCMC efficiency and/or rate on a per-parameter or per-MCMC basis as well as comparing posterior distributions.   New graphical outputs can be provided by a plug-in system.   In summary, `compareMCMCs` is modular and extensible for running new MCMC engines on comparable problems, for creating new metrics of interest (e.g., posterior summaries or effective sample size estimated in different ways), and for creating new graphical comparison outputs into a report.
 
 # Statement of need
 
-`Gala` is an Astropy-affiliated Python package for galactic dynamics. Python
-enables wrapping low-level languages (e.g., C) for speed without losing
-flexibility or ease-of-use in the user-interface. The API for `Gala` was
-designed to provide a class-based and user-friendly interface to fast (C or
-Cython-optimized) implementations of common operations such as gravitational
-potential and force evaluation, orbit integration, dynamical transformations,
-and chaos indicators for nonlinear dynamics. `Gala` also relies heavily on and
-interfaces well with the implementations of physical units and astronomical
-coordinate systems in the `Astropy` package [@astropy] (`astropy.units` and
-`astropy.coordinates`).
-
-`Gala` was designed to be used by both astronomical researchers and by
-students in courses on gravitational dynamics or astronomy. It has already been
-used in a number of scientific publications [@Pearson:2017] and has also been
-used in graduate courses on Galactic dynamics to, e.g., provide interactive
-visualizations of textbook material [@Binney:2008]. The combination of speed,
-design, and support for Astropy functionality in `Gala` will enable exciting
-scientific explorations of forthcoming data releases from the *Gaia* mission
-[@gaia] by students and experts alike.
-
-# Mathematics
-
-Single dollars ($) are required for inline mathematics e.g. $f(x) = e^{\pi/x}$
-
-Double dollars make self-standing equations:
-
-$$\Theta(x) = \left\{\begin{array}{l}
-0\textrm{ if } x < 0\cr
-1\textrm{ else}
-\end{array}\right.$$
-
-You can also use plain \LaTeX for equations
-\begin{equation}\label{eq:fourier}
-\hat f(\omega) = \int_{-\infty}^{\infty} f(x) e^{i\omega x} dx
-\end{equation}
-and refer to \autoref{eq:fourier} from text.
-
-# Citations
-
-Citations to entries in paper.bib should be in
-[rMarkdown](http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html)
-format.
-
-If you want to cite a software repository URL (e.g. something on GitHub without a preferred
-citation) then you can do it with the example BibTeX entry below for @fidgit.
-
-For a quick reference, the following citation commands can be used:
-- `@author:2001`  ->  "Author et al. (2001)"
-- `[@author:2001]` -> "(Author et al., 2001)"
-- `[@author1:2001; @author2:2001]` -> "(Author1 et al., 2001; Author2 et al., 2002)"
-
-# Figures
-
-Figures can be included like this:
-![Caption for example figure.\label{fig:example}](figure.png)
-and referenced from text using \autoref{fig:example}.
-
-Figure sizes can be customized by adding an optional second parameter:
-![Caption for example figure.](figure.png){ width=20% }
+TBD
 
 # Acknowledgements
 
-We acknowledge contributions from Brigitta Sipocz, Syrtis Major, and Semyeong
-Oh, and support from Kathryn Johnston during the genesis of this project.
+We thank other developers who have contributed to `nimble`, in which an early version of the features of `compareMCMCs` was first drafted and from which its design needs became clearer.  Daniel Turek wrote the first version of what evolved into `compareMCMCs`, and Christopher Paciorek contributed ideas along the way.
 
 # References
