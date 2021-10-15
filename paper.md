@@ -18,8 +18,6 @@ affiliations:
    index: 1
  - name:  Williams College
    index: 2
- - name: Independent Researcher
-   index: 3
 date: 13 August 2017
 bibliography: paper.bib
 
