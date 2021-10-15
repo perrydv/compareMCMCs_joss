@@ -7,19 +7,23 @@ tags:
   - nimble
   - JAGS
 authors:
-  - name: Perry de Valpine
-  affiliation: 1
-  - name: Sally Paganin
-  affiliation: 1
-  - name: Daniel Turek
-  affiliation: 2
+  - name: Adrian M. Price-Whelan^[co-first author] # note this makes a footnote saying 'co-first author'
+    orcid: 0000-0003-0872-7098
+    affiliation: "1, 2" # (Multiple affiliations must be quoted)
+  - name: Author Without ORCID^[co-first author] # note this makes a footnote saying 'co-first author'
+    affiliation: 2
+  - name: Author with no affiliation^[corresponding author]
+    affiliation: 3
 affiliations:
-  - name: University of California, Berkeley
+ - name: Lyman Spitzer, Jr. Fellow, Princeton University
    index: 1
-  - name: Williams College
+ - name: Institution Name
    index: 2
-date: 15 Oct 2021
+ - name: Independent Researcher
+   index: 3
+date: 13 August 2017
 bibliography: paper.bib
+
 
 ---
 
