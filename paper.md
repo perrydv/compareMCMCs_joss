@@ -45,4 +45,3 @@ Packages for post-processing of MCMC samples (e.g., `coda` [@coda], `BayesPostEs
 We thank other developers who have contributed to `nimble`, in which an early version of the features of `compareMCMCs` was first drafted and from which its design needs became clearer.  Daniel Turek wrote the first version of what evolved into `compareMCMCs`, and Christopher Paciorek contributed ideas along the way.
 
 # References
-
